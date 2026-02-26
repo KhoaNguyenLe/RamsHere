@@ -80,7 +80,7 @@ export default function AboutUs() {
 
         {/* Team Section */}
         <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-sm border border-gray-200 dark:border-gray-700 mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Meet Our Team</h2>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Meet Us</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {team.map((member, index) => (
               <div key={index} className="text-center">
