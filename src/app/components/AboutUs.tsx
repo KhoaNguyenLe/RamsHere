@@ -1,4 +1,6 @@
-import { Target, Users, Heart, Trophy } from "lucide-react";
+import { Target, Users, Heart, Trophy, Mail, Phone, MapPin } from "lucide-react";
+import khoaLeImage from "figma:asset/bb58322e0b66b8c0cacbccedcf7ce894769a16d8.png";
+import adryelImage from "figma:asset/d0b01b31b5f7ce7381ea032c8e031d83b2d05a91.png";
 
 export default function AboutUs() {
   const values = [
@@ -29,11 +31,38 @@ export default function AboutUs() {
   ];
 
   const team = [
-    { name: "Sarah Johnson", role: "Founder & Director", department: "Computer Science" },
-    { name: "Michael Chen", role: "Events Coordinator", department: "Business Administration" },
-    { name: "Emily Rodriguez", role: "Resources Manager", department: "Education" },
-    { name: "David Kim", role: "Technology Lead", department: "Engineering" },
+    { name: "Khoa Le", role: "Manager", department: "ECE", image: khoaLeImage },
+    { name: "Adryel Rosales Juarez", role: "Developer", department: "ECE", image: adryelImage },
+    { name: "Ruben Gomez", role: "Designer", department: "ECE" },
+
   ];
+  const contacts = [
+    {
+      name: "General Inquiries",
+      email: "info@ramshere.edu",
+      phone: "(555) 123-4567",
+      office: "Student Center, Room 201",
+    },
+    {
+      name: "Events Team",
+      email: "events@ramshere.edu",
+      phone: "(555) 123-4568",
+      office: "Student Center, Room 202",
+    },
+    {
+      name: "Resources Team",
+      email: "resources@ramshere.edu",
+      phone: "(555) 123-4569",
+      office: "Student Center, Room 203",
+    },
+    {
+      name: "Technical Support",
+      email: "support@ramshere.edu",
+      phone: "(555) 123-4570",
+      office: "Student Center, Room 204",
+    },
+  ];
+
 
   return (
     <div className="h-full overflow-y-auto bg-gray-50 dark:bg-gray-900">
@@ -81,10 +110,18 @@ export default function AboutUs() {
         {/* Team Section */}
         <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-sm border border-gray-200 dark:border-gray-700 mb-8">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Meet Us</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
             {team.map((member, index) => (
               <div key={index} className="text-center">
-                <div className="w-24 h-24 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full mx-auto mb-4" />
+                {member.image ? (
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-40 h-40 rounded-full mx-auto mb-6 object-cover"
+                  />
+                ) : (
+                  <div className="w-40 h-40 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full mx-auto mb-6" />
+                )}
                 <h3 className="font-semibold text-gray-900 dark:text-white">{member.name}</h3>
                 <p className="text-sm text-orange-600 dark:text-orange-400 mb-1">{member.role}</p>
                 <p className="text-xs text-gray-500 dark:text-gray-400">{member.department}</p>
@@ -94,7 +131,7 @@ export default function AboutUs() {
         </div>
 
         {/* Stats Section */}
-        <div className="grid grid-cols-3 gap-6">
+        <div className="grid grid-cols-3 gap-6 mb-8">
           <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 text-center">
             <div className="text-4xl font-bold text-orange-600 dark:text-orange-400 mb-2">5,000+</div>
             <div className="text-gray-600 dark:text-gray-400">Active Students</div>
@@ -106,6 +143,40 @@ export default function AboutUs() {
           <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 text-center">
             <div className="text-4xl font-bold text-orange-600 dark:text-orange-400 mb-2">200+</div>
             <div className="text-gray-600 dark:text-gray-400">Events per Year</div>
+          </div>
+        </div>
+
+        {/* Contact Section */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-sm border border-gray-200 dark:border-gray-700">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Contact Us</h2>
+          <div className="space-y-4">
+            {contacts.map((contact, index) => (
+              <div key={index} className="flex items-start gap-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg border border-gray-200 dark:border-gray-600">
+                {/* Orange Square Placeholder */}
+                <div className="w-20 h-20 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex-shrink-0" />
+
+                {/* Contact Info */}
+                <div className="flex-1">
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">{contact.name}</h3>
+                  <div className="space-y-1 text-sm text-gray-600 dark:text-gray-400">
+                    <div className="flex items-center gap-2">
+                      <Mail className="w-4 h-4 text-orange-600 dark:text-orange-400" />
+                      <a href={`mailto:${contact.email}`} className="hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                        {contact.email}
+                      </a>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Phone className="w-4 h-4 text-orange-600 dark:text-orange-400" />
+                      <span>{contact.phone}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <MapPin className="w-4 h-4 text-orange-600 dark:text-orange-400" />
+                      <span>{contact.office}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
