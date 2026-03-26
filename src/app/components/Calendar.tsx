@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, Calendar as CalendarIcon } from "lucide-react";
-import { events } from "../data/events";
+import { ChevronLeft, ChevronRight, Calendar as CalendarIcon, Tag } from "lucide-react";
+import { useEventContext } from "../context/EventContext";
 
 export default function Calendar() {
+  const { events } = useEventContext();
   const [currentDate, setCurrentDate] = useState(new Date(2026, 1, 1)); // February 2026
 
   const monthNames = [
@@ -160,6 +161,16 @@ export default function Calendar() {
                       <span>•</span>
                       <span>{event.location}</span>
                     </div>
+                    {event.majorTags && event.majorTags.length > 0 && (
+                      <div className="flex flex-wrap gap-2 mt-3">
+                        {event.majorTags.map((tag, idx) => (
+                          <span key={idx} className="flex items-center gap-1 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs px-2 py-1 rounded-full border border-gray-200 dark:border-gray-700">
+                            <Tag className="w-3 h-3" />
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </div>
                   {event.type === "live" && (
                     <span className="flex items-center gap-1 text-xs text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/30 px-3 py-1 rounded-full">

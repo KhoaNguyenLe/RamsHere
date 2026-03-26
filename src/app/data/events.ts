@@ -8,6 +8,8 @@ export interface Event {
   type: "live" | "upcoming";
   category: string;
   attendees?: number;
+  photo?: string;
+  majorTags?: string[];
 }
 
 export const events: Event[] = [

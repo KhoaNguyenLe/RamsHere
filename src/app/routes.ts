@@ -7,6 +7,7 @@ import AboutUs from "./components/AboutUs";
 import Contacts from "./components/Contacts";
 import GetInvolved from "./components/GetInvolved";
 import NotFound from "./components/NotFound";
+import Admin from "./components/Admin";
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ export const router = createBrowserRouter([
       { path: "about", Component: AboutUs },
       { path: "contacts", Component: Contacts },
       { path: "get-involved", Component: GetInvolved },
+      { path: "admin", Component: Admin },
       { path: "*", Component: NotFound },
     ],
   },

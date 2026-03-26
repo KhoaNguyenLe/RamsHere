@@ -1,7 +1,4 @@
 import { Target, Users, Heart, Trophy, Mail, Phone, MapPin } from "lucide-react";
-import khoaLeImage from "figma:asset/bb58322e0b66b8c0cacbccedcf7ce894769a16d8.png";
-import adryelImage from "figma:asset/d0b01b31b5f7ce7381ea032c8e031d83b2d05a91.png";
-
 export default function AboutUs() {
   const values = [
     {
@@ -30,11 +27,10 @@ export default function AboutUs() {
     },
   ];
 
-  const team = [
-    { name: "Khoa Le", role: "Manager", department: "ECE", image: khoaLeImage },
-    { name: "Adryel Rosales Juarez", role: "Developer", department: "ECE", image: adryelImage },
+  const team: Array<{ name: string; role: string; department: string; image?: string }> = [
+    { name: "Khoa Le", role: "Manager", department: "ECE" },
+    { name: "Adryel Rosales Juarez", role: "Developer", department: "ECE" },
     { name: "Ruben Gomez", role: "Designer", department: "ECE" },
-
   ];
   const contacts = [
     {

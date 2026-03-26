@@ -12,6 +12,7 @@ export default function Navbar() {
     { path: "/about", label: "About Us" },
     { path: "/contacts", label: "Contacts" },
     { path: "/get-involved", label: "Get Involved" },
+    { path: "/admin", label: "Admin" },
   ];
 
   return (

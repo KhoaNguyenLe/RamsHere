@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { events } from "../data/events";
+import { useEventContext } from "../context/EventContext";
 import EventSidebar from "./EventSidebar";
 import { Calendar, Clock, MapPin, Users, Tag } from "lucide-react";
 
 export default function Home() {
+  const { events } = useEventContext();
   const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
   const liveEvents = events.filter((e) => e.type === "live");
 
@@ -54,6 +55,23 @@ export default function Home() {
               
               <p className="text-gray-700 dark:text-gray-300 text-lg mb-6 leading-relaxed">{selectedEvent.description}</p>
               
+              {selectedEvent.photo && (
+                <div className="mb-6">
+                  <img src={selectedEvent.photo} alt={selectedEvent.title} className="w-full h-64 object-cover rounded-xl border border-gray-200 dark:border-gray-700" />
+                </div>
+              )}
+
+              {selectedEvent.majorTags && selectedEvent.majorTags.length > 0 && (
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {selectedEvent.majorTags.map((tag, idx) => (
+                    <span key={idx} className="flex items-center gap-1 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700">
+                      <Tag className="w-3 h-3" />
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+
               <div className="grid grid-cols-2 gap-4">
                 <div className="flex items-center gap-3 bg-white dark:bg-gray-800 p-4 rounded-lg">
                   <Calendar className="w-5 h-5 text-orange-600 dark:text-orange-400" />
