@@ -65,7 +65,7 @@ export default function EventSidebar({ events, selectedEventId, onEventSelect }:
                 <h4 className="font-medium text-gray-900 dark:text-white text-sm mb-1">{event.title}</h4>
                 <div className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400 mb-1">
                   <Calendar className="w-3 h-3" />
-                  <span>{new Date(event.date).toLocaleDateString()}</span>
+                  <span>{new Date(`${event.date}T12:00:00`).toLocaleDateString()}</span>
                 </div>
                 <div className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
                   <Clock className="w-3 h-3" />

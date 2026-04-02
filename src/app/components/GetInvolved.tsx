@@ -1,4 +1,4 @@
-import { Users, Calendar, BookOpen, Megaphone, Heart, Code } from "lucide-react";
+import { Users, Calendar, BookOpen } from "lucide-react";
 
 export default function GetInvolved() {
   const opportunities = [
@@ -22,27 +22,6 @@ export default function GetInvolved() {
       description: "Share your study materials, guides, or tutorials with fellow students. Help others succeed in their academic journey.",
       color: "bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400",
       action: "Upload Resources",
-    },
-    {
-      icon: Megaphone,
-      title: "Become an Ambassador",
-      description: "Represent RamsHere at your faculty or department. Help spread the word and gather feedback from students.",
-      color: "bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400",
-      action: "Sign Up",
-    },
-    {
-      icon: Code,
-      title: "Tech Contributors",
-      description: "Help us improve our platform! We're looking for developers, designers, and UX enthusiasts to enhance the student experience.",
-      color: "bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400",
-      action: "View Projects",
-    },
-    {
-      icon: Heart,
-      title: "Peer Mentorship",
-      description: "Support incoming students by sharing your experiences and helping them navigate university life.",
-      color: "bg-pink-100 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400",
-      action: "Become a Mentor",
     },
   ];
 
@@ -73,15 +52,15 @@ export default function GetInvolved() {
           </p>
           <div className="grid md:grid-cols-3 gap-6">
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-              <div className="text-3xl font-bold mb-1">500+</div>
+              <div className="text-3xl font-bold mb-1">0</div>
               <div className="text-orange-100">Active Volunteers</div>
             </div>
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-              <div className="text-3xl font-bold mb-1">1,200+</div>
+              <div className="text-3xl font-bold mb-1">0</div>
               <div className="text-orange-100">Hours Contributed</div>
             </div>
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-              <div className="text-3xl font-bold mb-1">50+</div>
+              <div className="text-3xl font-bold mb-1">0</div>
               <div className="text-orange-100">Student Events</div>
             </div>
           </div>

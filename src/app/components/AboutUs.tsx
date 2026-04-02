@@ -1,4 +1,7 @@
-import { Target, Users, Heart, Trophy, Mail, Phone, MapPin } from "lucide-react";
+import { Target, Users, Heart, Trophy } from "lucide-react";
+import adryelImage from "../../assets/adryel.png";
+import rubenImage from "../../assets/ruben.jpg";
+import khoaImage from "../../assets/khoa.png";
 export default function AboutUs() {
   const values = [
     {
@@ -28,36 +31,11 @@ export default function AboutUs() {
   ];
 
   const team: Array<{ name: string; role: string; department: string; image?: string }> = [
-    { name: "Khoa Le", role: "Manager", department: "ECE" },
-    { name: "Adryel Rosales Juarez", role: "Developer", department: "ECE" },
-    { name: "Ruben Gomez", role: "Designer", department: "ECE" },
+    { name: "Khoa Le", role: "Manager", department: "ECE", image: khoaImage },
+    { name: "Adryel Rosales Juarez", role: "Developer", department: "ECE", image: adryelImage },
+    { name: "Ruben Gomez", role: "Designer", department: "ECE", image: rubenImage },
   ];
-  const contacts = [
-    {
-      name: "General Inquiries",
-      email: "info@ramshere.edu",
-      phone: "(555) 123-4567",
-      office: "Student Center, Room 201",
-    },
-    {
-      name: "Events Team",
-      email: "events@ramshere.edu",
-      phone: "(555) 123-4568",
-      office: "Student Center, Room 202",
-    },
-    {
-      name: "Resources Team",
-      email: "resources@ramshere.edu",
-      phone: "(555) 123-4569",
-      office: "Student Center, Room 203",
-    },
-    {
-      name: "Technical Support",
-      email: "support@ramshere.edu",
-      phone: "(555) 123-4570",
-      office: "Student Center, Room 204",
-    },
-  ];
+
 
 
   return (
@@ -75,7 +53,7 @@ export default function AboutUs() {
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Our Story</h2>
           <div className="space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed">
             <p>
-              RamsHere was founded in 2024 by a group of passionate students who recognized the need for a centralized platform where university students could access resources, discover events, and connect with their community.
+              RamsHere was founded in 2026 by a group of passionate students who recognized the need for a centralized platform where university students could access resources, discover events, and connect with their community.
             </p>
             <p>
               What started as a simple website with a few study guides has grown into a comprehensive platform serving thousands of students. We've compiled resources across all disciplines, organized hundreds of events, and created a thriving community of learners.
@@ -129,50 +107,16 @@ export default function AboutUs() {
         {/* Stats Section */}
         <div className="grid grid-cols-3 gap-6 mb-8">
           <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 text-center">
-            <div className="text-4xl font-bold text-orange-600 dark:text-orange-400 mb-2">5,000+</div>
+            <div className="text-4xl font-bold text-orange-600 dark:text-orange-400 mb-2">0</div>
             <div className="text-gray-600 dark:text-gray-400">Active Students</div>
           </div>
           <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 text-center">
-            <div className="text-4xl font-bold text-orange-600 dark:text-orange-400 mb-2">500+</div>
+            <div className="text-4xl font-bold text-orange-600 dark:text-orange-400 mb-2">0</div>
             <div className="text-gray-600 dark:text-gray-400">Resources</div>
           </div>
           <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 text-center">
-            <div className="text-4xl font-bold text-orange-600 dark:text-orange-400 mb-2">200+</div>
+            <div className="text-4xl font-bold text-orange-600 dark:text-orange-400 mb-2">0</div>
             <div className="text-gray-600 dark:text-gray-400">Events per Year</div>
-          </div>
-        </div>
-
-        {/* Contact Section */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-sm border border-gray-200 dark:border-gray-700">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Contact Us</h2>
-          <div className="space-y-4">
-            {contacts.map((contact, index) => (
-              <div key={index} className="flex items-start gap-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg border border-gray-200 dark:border-gray-600">
-                {/* Orange Square Placeholder */}
-                <div className="w-20 h-20 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex-shrink-0" />
-
-                {/* Contact Info */}
-                <div className="flex-1">
-                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">{contact.name}</h3>
-                  <div className="space-y-1 text-sm text-gray-600 dark:text-gray-400">
-                    <div className="flex items-center gap-2">
-                      <Mail className="w-4 h-4 text-orange-600 dark:text-orange-400" />
-                      <a href={`mailto:${contact.email}`} className="hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
-                        {contact.email}
-                      </a>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Phone className="w-4 h-4 text-orange-600 dark:text-orange-400" />
-                      <span>{contact.phone}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4 text-orange-600 dark:text-orange-400" />
-                      <span>{contact.office}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </div>

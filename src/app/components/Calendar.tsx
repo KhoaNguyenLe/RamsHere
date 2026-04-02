@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, Calendar as CalendarIcon, Tag } from "lucide-react";
+import { ChevronLeft, ChevronRight, Calendar as CalendarIcon, Tag, Search } from "lucide-react";
 import { useEventContext } from "../context/EventContext";
 
 export default function Calendar() {
   const { events } = useEventContext();
-  const [currentDate, setCurrentDate] = useState(new Date(2026, 1, 1)); // February 2026
+  const [currentDate, setCurrentDate] = useState(new Date()); // Current actual date
+  const [searchQuery, setSearchQuery] = useState("");
 
   const monthNames = [
     "January", "February", "March", "April", "May", "June",
@@ -34,7 +35,17 @@ export default function Calendar() {
 
   const getEventsForDay = (day: number) => {
     const dateStr = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-    return events.filter(event => event.date === dateStr);
+    let dailyEvents = events.filter(event => event.date === dateStr);
+    
+    if (searchQuery) {
+      const lowerQuery = searchQuery.toLowerCase();
+      dailyEvents = dailyEvents.filter(event => 
+        event.title.toLowerCase().includes(lowerQuery) || 
+        event.description.toLowerCase().includes(lowerQuery) ||
+        (event.majorTags && event.majorTags.some(tag => tag.toLowerCase().includes(lowerQuery)))
+      );
+    }
+    return dailyEvents;
   };
 
   const days = Array.from({ length: 42 }, (_, i) => {
@@ -48,11 +59,23 @@ export default function Calendar() {
   return (
     <div className="h-full overflow-y-auto bg-gray-50 dark:bg-gray-900">
       <div className="max-w-6xl mx-auto p-8">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Event Calendar</h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400">
-            Stay up to date with all upcoming university events and activities
-          </p>
+        <div className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Event Calendar</h1>
+            <p className="text-xl text-gray-600 dark:text-gray-400">
+              Stay up to date with all upcoming university events and activities
+            </p>
+          </div>
+          <div className="relative">
+            <Search className="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+            <input 
+              type="text" 
+              placeholder="Search events, descriptions, or majors..." 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-orange-500 w-full md:w-80"
+            />
+          </div>
         </div>
 
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
@@ -89,7 +112,10 @@ export default function Calendar() {
             {/* Calendar Days */}
             {days.map((day, index) => {
               const dayEvents = day ? getEventsForDay(day) : [];
-              const isToday = day === 16 && currentDate.getMonth() === 1; // Feb 16, 2026
+              const today = new Date();
+              const isToday = day === today.getDate() && 
+                              currentDate.getMonth() === today.getMonth() && 
+                              currentDate.getFullYear() === today.getFullYear();
 
               return (
                 <div
@@ -133,15 +159,23 @@ export default function Calendar() {
 
         {/* Upcoming Events List */}
         <div className="mt-8 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Upcoming Events This Month</h3>
+          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+            {searchQuery ? "Search Results" : "Upcoming Events This Month"}
+          </h3>
           <div className="space-y-3">
             {events
               .filter((event) => {
-                const eventDate = new Date(event.date);
-                return (
-                  eventDate.getMonth() === currentDate.getMonth() &&
-                  eventDate.getFullYear() === currentDate.getFullYear()
-                );
+                const eventDate = new Date(`${event.date}T12:00:00`);
+                const isThisMonth = eventDate.getMonth() === currentDate.getMonth() && eventDate.getFullYear() === currentDate.getFullYear();
+                
+                if (!searchQuery) return isThisMonth;
+                
+                const lowerQuery = searchQuery.toLowerCase();
+                const matchesSearch = event.title.toLowerCase().includes(lowerQuery) || 
+                                      event.description.toLowerCase().includes(lowerQuery) ||
+                                      (event.majorTags && event.majorTags.some(tag => tag.toLowerCase().includes(lowerQuery)));
+                                      
+                return isThisMonth && matchesSearch;
               })
               .map((event) => (
                 <div
@@ -155,7 +189,7 @@ export default function Calendar() {
                     <h4 className="font-semibold text-gray-900 dark:text-white mb-1">{event.title}</h4>
                     <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">{event.description}</p>
                     <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
-                      <span>{new Date(event.date).toLocaleDateString()}</span>
+                      <span>{new Date(`${event.date}T12:00:00`).toLocaleDateString()}</span>
                       <span>•</span>
                       <span>{event.time}</span>
                       <span>•</span>

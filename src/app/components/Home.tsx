@@ -78,7 +78,7 @@ export default function Home() {
                   <div>
                     <p className="text-xs text-gray-500 dark:text-gray-400 uppercase">Date</p>
                     <p className="font-medium text-gray-900 dark:text-white">
-                      {new Date(selectedEvent.date).toLocaleDateString("en-US", { 
+                      {new Date(`${selectedEvent.date}T12:00:00`).toLocaleDateString("en-US", { 
                         weekday: "long", 
                         month: "long", 
                         day: "numeric" 

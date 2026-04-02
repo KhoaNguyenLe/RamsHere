@@ -5,31 +5,30 @@ export default function Contacts() {
     {
       icon: Mail,
       title: "Email Us",
-      value: "hello@ramshere.edu",
+      value: "khoanguyenle2007@gmail.com",
       description: "We'll respond within 24 hours",
       color: "bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400",
     },
     {
       icon: Phone,
       title: "Call Us",
-      value: "(555) 123-4567",
+      value: "(832) 913-9896",
       description: "Mon-Fri, 9:00 AM - 5:00 PM",
       color: "bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400",
     },
     {
       icon: MapPin,
       title: "Visit Us",
-      value: "Student Center, Room 201",
+      value: "EER, Room 1.504",
       description: "Office hours: Mon-Fri, 10:00 AM - 4:00 PM",
       color: "bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400",
     },
   ];
 
   const departments = [
-    { name: "General Inquiries", email: "info@ramshere.edu" },
-    { name: "Events Team", email: "events@ramshere.edu" },
-    { name: "Resources Team", email: "resources@ramshere.edu" },
-    { name: "Technical Support", email: "support@ramshere.edu" },
+    { name: "General Inquiries", email: "knl2366@eid.utexas.edu" },
+    { name: "Events Team", email: "ar8426@eid.utexas.edu" },
+    { name: "Resources Team", email: "rgomez@eid.utexas.edu" },
   ];
 
   return (
