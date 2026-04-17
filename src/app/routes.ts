@@ -8,6 +8,7 @@ import Contacts from "./components/Contacts";
 import GetInvolved from "./components/GetInvolved";
 import NotFound from "./components/NotFound";
 import Admin from "./components/Admin";
+import Login from "./components/Login";
 
 export const router = createBrowserRouter([
   {
@@ -21,6 +22,7 @@ export const router = createBrowserRouter([
       { path: "contacts", Component: Contacts },
       { path: "get-involved", Component: GetInvolved },
       { path: "admin", Component: Admin },
+      { path: "login", Component: Login },
       { path: "*", Component: NotFound },
     ],
   },
