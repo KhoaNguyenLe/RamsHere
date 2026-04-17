@@ -21,33 +21,45 @@ export default function Admin() {
     majorTags: "All Majors",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setErrorMessage("");
+    setSuccessMessage("");
     
-    // Parse tags to array
-    const tagsArray = formData.majorTags.split(",").map(tag => tag.trim()).filter(Boolean);
-    
-    addEvent({
-      ...formData,
-      majorTags: tagsArray,
-    });
-    
-    setSuccessMessage("Event created successfully!");
-    
-    // Reset form
-    setFormData({
-      title: "",
-      date: "",
-      time: "",
-      location: "",
-      description: "",
-      type: "upcoming",
-      category: "General",
-      photo: "",
-      majorTags: "All Majors",
-    });
-    
-    setTimeout(() => setSuccessMessage(""), 3000);
+    try {
+      // Parse tags to array
+      const tagsArray = formData.majorTags.split(",").map(tag => tag.trim()).filter(Boolean);
+      
+      await addEvent({
+        ...formData,
+        majorTags: tagsArray,
+      });
+      
+      setSuccessMessage("Event created and saved to database!");
+      
+      // Reset form
+      setFormData({
+        title: "",
+        date: "",
+        time: "",
+        location: "",
+        description: "",
+        type: "upcoming",
+        category: "General",
+        photo: "",
+        majorTags: "All Majors",
+      });
+      
+      setTimeout(() => setSuccessMessage(""), 3000);
+    } catch (err: any) {
+      setErrorMessage("Failed to save event. Please check your connection.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -93,12 +105,19 @@ export default function Admin() {
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Create New Event</h2>
           
           {successMessage && (
-            <div className="mb-6 p-4 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-lg border border-green-200 dark:border-green-800">
+            <div className="mb-6 p-4 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-lg border border-green-200 dark:border-green-800 animate-in fade-in duration-300">
               {successMessage}
             </div>
           )}
 
+          {errorMessage && (
+            <div className="mb-6 p-4 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-lg border border-red-200 dark:border-red-800 animate-in fade-in duration-300">
+              {errorMessage}
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-6">
+            {/* ... other fields remain same ... */}
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Event Title
@@ -240,10 +259,17 @@ export default function Admin() {
 
             <button
               type="submit"
-              className="w-full py-3 px-4 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+              disabled={isSubmitting}
+              className="w-full py-3 px-4 bg-orange-600 hover:bg-orange-700 disabled:bg-orange-400 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
             >
-              <Upload className="w-5 h-5" />
-              Create Event
+              {isSubmitting ? (
+                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              ) : (
+                <>
+                  <Upload className="w-5 h-5" />
+                  Create Event
+                </>
+              )}
             </button>
           </form>
         </div>
