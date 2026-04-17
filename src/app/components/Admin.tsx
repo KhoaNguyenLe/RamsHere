@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { useEventContext } from "../context/EventContext";
-import { Upload, Calendar, Clock, MapPin, Tag, Image as ImageIcon } from "lucide-react";
+import { Upload, Calendar, Clock, MapPin, Tag, Image as ImageIcon, ShieldAlert } from "lucide-react";
+import { useViewContext } from "../context/ViewContext";
+import { Link } from "react-router";
 
 export default function Admin() {
   const { addEvent } = useEventContext();
+  const { view } = useViewContext();
   const [successMessage, setSuccessMessage] = useState("");
   
   const [formData, setFormData] = useState({
@@ -53,6 +56,28 @@ export default function Admin() {
       [e.target.name]: e.target.value
     }));
   };
+
+  if (view === "student") {
+    return (
+      <div className="h-full flex items-center justify-center bg-gray-50 dark:bg-gray-900 p-8">
+        <div className="max-w-md w-full bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-10 text-center">
+          <div className="w-20 h-20 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
+            <ShieldAlert className="w-10 h-10 text-orange-600 dark:text-orange-400" />
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Access Restricted</h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-8">
+            This page is only accessible in **Admin View**. Please use the switcher in the navigation bar to change perspectives.
+          </p>
+          <Link
+            to="/"
+            className="inline-block w-full py-3 px-6 bg-orange-600 hover:bg-orange-700 text-white rounded-xl font-semibold transition-all shadow-lg shadow-orange-500/20"
+          >
+            Back to Home
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="h-full overflow-y-auto bg-gray-50 dark:bg-gray-900 p-8">
